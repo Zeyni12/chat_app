@@ -2,6 +2,7 @@
 import socket
 import threading
 
+
 HOST = '127.0.0.1'
 PORT = 1234 # You can use any port between 0 to 65535
 LISTNER_LIMIT = 5
@@ -41,6 +42,8 @@ def client_handler(client):
          username = client.recv(2048).decode('utf-8')
          if username != '':
              active_clients.append((username, client))
+             prompt_message = 'SERVER' + (f'{username} added to the chat')
+             send_messages_to_all(prompt_message)
              break       
          else:
              print('client username is empty')    
